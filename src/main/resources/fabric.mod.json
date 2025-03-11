@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "mc-uptime",
+	"version": "${version}",
+	"name": "MC Uptime",
+	"description": "Keep an eye on the server status while you play!",
+	"authors": [
+		"dertfin1"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/mc-uptime/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ru.dfhub.MCUptime"
+		],
+		"client": [
+			"ru.dfhub.MCUptimeClient"
+		]
+	},
+	"mixins": [
+		"mc-uptime.mixins.json",
+		{
+			"config": "mc-uptime.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

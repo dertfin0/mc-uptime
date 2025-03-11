@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "ru.dfhub.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+      "ru.dfhub.mixin.client.ClientMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "ru.dfhub.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ru.dfhub.mixin.MCUptimeMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
