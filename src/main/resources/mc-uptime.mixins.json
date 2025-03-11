@@ -3,7 +3,7 @@
 	"package": "ru.dfhub.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ru.dfhub.mixin.MCUptimeMixin"
+		"MCUptimeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
