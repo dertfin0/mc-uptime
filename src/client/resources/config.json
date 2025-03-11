@@ -1,0 +1,8 @@
+{
+  "sites" : [
+    {
+      "id" : "Example",
+      "url" : "https://example.com"
+    }
+  ]
+}
