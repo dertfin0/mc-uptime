@@ -4,5 +4,6 @@
       "id" : "Example",
       "url" : "https://example.com"
     }
-  ]
+  ],
+  "cooldown" : 60
 }
