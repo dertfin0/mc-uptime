@@ -7,12 +7,17 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class SiteCheckThread extends Thread{
 
     @Override
     public void run() {
-        while (true) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        scheduler.scheduleWithFixedDelay(() -> {
             JSONArray sites = Config.getConfig().getJSONArray("sites");
             for (int i = 0; i < sites.length(); i++) {
                 JSONObject site = sites.getJSONObject(i);
@@ -23,13 +28,7 @@ public class SiteCheckThread extends Thread{
                     //MCUptime.LOGGER.info("Site %s works!".formatted(site.getString("id")));
                 }
             }
-
-            try {
-                Thread.sleep(Config.getConfig().optInt("cooldown", 60) * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        }, 0, Config.getConfig().getInt("cooldown"), TimeUnit.SECONDS);
     }
 
     private static boolean check(String url) {
