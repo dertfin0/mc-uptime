@@ -3,6 +3,9 @@ package ru.dfhub;
 
 
 
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.text.Text;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -23,6 +26,18 @@ public class Config {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void registerReloadCommand() {
+        CommandRegistrationCallback.EVENT.register((dispatcher, literal, builder) -> {
+            dispatcher.register(CommandManager.literal("mc-uptime")
+                    .then(CommandManager.literal("reload").executes(ctx -> {
+                        Config.reload();
+                        ctx.getSource().sendMessage(Text.of("§KMC-Uptime config reloaded!"));
+                        return 0;
+                    }))
+            );
+        });
     }
 
     public static JSONObject getConfig() {

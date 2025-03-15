@@ -16,5 +16,6 @@ public class MCUptimeClient implements ClientModInitializer {
 		Thread siteCheckThread = new SiteCheckThread();
 		siteCheckThread.start();
 		HudLayerRegistrationCallback.EVENT.register(drawer -> drawer.attachLayerBefore(IdentifiedLayer.CHAT, Identifier.of(MOD_ID, "STATUS_TEXT"), GameNotifier::hud));
+		Config.registerReloadCommand();
 	}
 }
