@@ -23,11 +23,7 @@ public class GameNotifier {
         client.player.playSound(SoundEvent.of(Identifier.of("minecraft:block.anvil.land")), 1.0F, 1.0F);
 
         if (client.world == null) return;
-        Text msg = Text.of("""
-            §4=========================
-            §c !!!WARNING!!!%n%n
-            §c It looks like some sites are down: §b%s§c!
-            §4=========================""".formatted(sites));
+        Text msg = Text.of("§c It looks like some sites are down: §b%s§c!".formatted(sites));
         client.player.sendMessage(msg, false);
     }
 

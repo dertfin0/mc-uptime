@@ -31,7 +31,7 @@ public class SiteCheckThread extends Thread{
             }
 
             if (!sitesDown.isEmpty()) {
-                GameNotifier.notify(String.join(", ", sitesDown));
+                GameNotifier.notify(String.join("§c, §b", sitesDown));
             } else {
                 GameNotifier.statusOk();
             }
