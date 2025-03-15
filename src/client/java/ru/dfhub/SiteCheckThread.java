@@ -20,6 +20,9 @@ public class SiteCheckThread extends Thread{
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.scheduleWithFixedDelay(() -> {
+            if (!checkConnection()) { GameNotifier.setConnected(false); return;};
+            GameNotifier.setConnected(true);
+
             JSONArray sites = Config.getConfig().getJSONArray("sites");
             List<String> sitesDown = new ArrayList<>();
 
@@ -39,8 +42,7 @@ public class SiteCheckThread extends Thread{
     }
 
     private static boolean check(String url) {
-        try {
-            HttpClient client = HttpClient.newBuilder().build();
+        try (HttpClient client = HttpClient.newBuilder().build();) {
             HttpResponse<String> res = client.send(HttpRequest
                     .newBuilder()
                     .HEAD()
@@ -51,5 +53,9 @@ public class SiteCheckThread extends Thread{
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private static boolean checkConnection() {
+        return check("https://www.google.com/");
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 public class GameNotifier {
 
     private static boolean isDownLastMinute = false;
+    private static boolean isConnected = true;
 
     public static void notify(String sites) {
         isDownLastMinute = true;
@@ -31,10 +32,14 @@ public class GameNotifier {
         isDownLastMinute = false;
     }
 
+    public static void setConnected(boolean status) {
+        isConnected = status;
+    }
+
     public static void hud(DrawContext ctx, RenderTickCounter tick) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.world == null) return;
-        Text text = Text.of(isDownLastMinute ? "§c✘ Something down" : "§a✔ All sites are OK");
+        Text text = Text.of(isConnected ? (isDownLastMinute ? "§c✘ Something down" : "§a✔ All sites are OK") : "§e No connection!") ;
 
         int x = client.getWindow().getScaledWidth() - client.textRenderer.getWidth(text) - 10;
         int y = client.getWindow().getScaledHeight() - client.textRenderer.fontHeight - 10;
