@@ -33,7 +33,7 @@ public class Config {
             dispatcher.register(CommandManager.literal("mc-uptime")
                     .then(CommandManager.literal("reload").executes(ctx -> {
                         Config.reload();
-                        ctx.getSource().sendMessage(Text.of("§KMC-Uptime config reloaded!"));
+                        ctx.getSource().sendMessage(Text.of("§aMC-Uptime config reloaded!"));
                         return 0;
                     }))
             );
