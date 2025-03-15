@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,14 +21,19 @@ public class SiteCheckThread extends Thread{
 
         scheduler.scheduleWithFixedDelay(() -> {
             JSONArray sites = Config.getConfig().getJSONArray("sites");
+            List<String> sitesDown = new ArrayList<>();
+
             for (int i = 0; i < sites.length(); i++) {
                 JSONObject site = sites.getJSONObject(i);
                 if (!check(site.getString("url"))) {
-                    // TODO: send notification
-                    //MCUptime.LOGGER.error("Site %s is down!".formatted(site.getString("id")));
-                } else {
-                    //MCUptime.LOGGER.info("Site %s works!".formatted(site.getString("id")));
+                    sitesDown.add(site.getString("id"));
                 }
+            }
+
+            if (!sitesDown.isEmpty()) {
+                GameNotifier.notify(String.join(", ", sitesDown));
+            } else {
+                GameNotifier.statusOk();
             }
         }, 0, Config.getConfig().getInt("cooldown"), TimeUnit.SECONDS);
     }
