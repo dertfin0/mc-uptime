@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -47,6 +48,7 @@ public class SiteCheckThread extends Thread{
                     .newBuilder()
                     .HEAD()
                     .uri(URI.create(url))
+                    .timeout(Duration.ofSeconds(10))
                     .build()
             , HttpResponse.BodyHandlers.ofString());
             return res.statusCode() == 200;
