@@ -48,7 +48,7 @@ public class SiteCheckThread extends Thread{
                     .newBuilder()
                     .HEAD()
                     .uri(URI.create(url))
-                    .timeout(Duration.ofSeconds(10))
+                    .timeout(Duration.ofSeconds(5))
                     .build()
             , HttpResponse.BodyHandlers.ofString());
             return res.statusCode() == 200;
